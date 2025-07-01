@@ -1,0 +1,38 @@
+.Toastify__toast {
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* evita que elementos sobresalgan */
+}
+
+.Toastify__toast--error {
+    background: #8B0000 !important; /* rojo oscuro */
+    color: #fff !important;
+}
+
+.Toastify__toast--error svg {
+    fill: #fff !important;
+    font-size: 22px !important;
+    margin-right: 8px;
+}
+
+/* Barra de progreso negra con bordes inferiores redondeados para que encaje */
+.Toastify__progress-bar--error {
+    background: #000 !important;
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+}
+
+/* Botón cerrar blanco */
+.Toastify__close-button {
+    color: #fff !important;
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.Toastify__close-button:hover {
+    opacity: 1;
+}

@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules (para backend y frontend)
+node_modules/
+
+# Carpetas de build/output
+dist/
+dist-ssr/
+
+# Archivos locales o de configuración local
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Variables de entorno
+.env
+
+# Ignorar carpeta components (contiene firebase.js con tokens)
+src/components/
+
+# Ignorar mongoService.js en cualquier carpeta
+**/mongoService.js
