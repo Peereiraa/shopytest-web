@@ -1,17 +1,63 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/Home"; 
+import Home from "./pages/Home";
+import Perfil from "./pages/Perfil";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { isAuthenticated } from "./components/auth"; 
+import './styles/index.css';
 
 function App() {
-  console.log("App renderizado");
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        {/* Redirección raíz */}
+        <Route
+          path="/"
+          element={
+            isAuthenticated() ? (
+              <Navigate to="/home" replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* Login */}
+        <Route
+          path="/login"
+          element={
+            isAuthenticated() ? (
+              <Navigate to="/home" replace />
+            ) : (
+              <Login />
+            )
+          }
+        />
+
+        {/* Registro */}
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
+
+        {}
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+
+        {}
+        <Route
+          path="/perfil"
+          element={
+            <ProtectedRoute>
+              <Perfil />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

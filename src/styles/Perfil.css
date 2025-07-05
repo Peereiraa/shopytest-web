@@ -1,0 +1,89 @@
+body,
+html,
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.perfil-container {
+    padding: 100px 2rem 2rem;
+    min-height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.perfil-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 720px;
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+
+.perfil-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.perfil-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #ffd600;
+    object-fit: cover;
+    background-color: #ffffff10;
+    margin-bottom: 1rem;
+}
+
+.perfil-username {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.perfil-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.perfil-option {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.perfil-option:hover {
+    background-color: rgba(255, 214, 0, 0.2);
+}
+
+.perfil-icon {
+    margin-right: 1rem;
+    font-size: 1.4rem;
+}
+
+.logout {
+    background-color: rgba(255, 77, 77, 0.1);
+}
+
+.logout:hover {
+    background-color: rgba(255, 77, 77, 0.25);
+}
+
+.perfil-option.logout {
+    cursor: pointer;
+}

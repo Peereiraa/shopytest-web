@@ -1,9 +1,19 @@
-import React from "react";
+import React from 'react';
+import Sidebar from '../components/Sidebar';
+import Nav from '../components/Nav'; 
 
-export default function Home() {
+const Home = () => {
     return (
-        <div>
-            <h1>Página Home</h1>
-        </div>
+        <>
+            <Sidebar />
+            <Nav />
+            {}
+            <main style={{ paddingTop: '64px' }}>
+                {/* Aquí tu contenido */}
+                <h1>Bienvenido a Home</h1>
+            </main>
+        </>
     );
-}
+};
+
+export default Home;

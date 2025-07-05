@@ -1,0 +1,9 @@
+.home-container {
+    margin-top: 64px; 
+    padding: 1.5rem;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #222;
+    font-family: Arial, sans-serif;
+}

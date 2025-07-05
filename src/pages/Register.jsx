@@ -1,12 +1,16 @@
-// Mismos imports (dejamos firebase solo para Google)
 import React, { useState } from "react";
+import '../styles/index.css';
 import { auth, provider } from "../components/firebase";
 import { signInWithPopup, updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import googleLogo from "../assets/google.png";
-import "../styles/toast.css";
+import "../styles/components/toast.css";
 import { useNavigate } from "react-router-dom";
+
+
+
 
 export default function Register() {
     const [username, setUsername] = useState("");
@@ -23,7 +27,6 @@ export default function Register() {
     const handleRegister = async () => {
         if (loading) return;
 
-        // Validaciones
         if (!username.trim() || !email.trim() || !password || !repeatPassword) {
             return toast.error("Por favor rellena todos los campos", { position: "bottom-right" });
         }
@@ -58,7 +61,7 @@ export default function Register() {
             setPassword("");
             setRepeatPassword("");
 
-            navigate("/?registered=true");
+            navigate("/login?registered=true");
         } catch (error) {
             toast.error(error.message, { position: "bottom-right" });
         } finally {
@@ -76,7 +79,7 @@ export default function Register() {
             await updateProfile(user, { displayName: user.displayName || "GoogleUser" });
 
             toast.success("Registro con Google exitoso", { position: "bottom-right" });
-            navigate("/?registered=true");
+            navigate("/login?registered=true");
         } catch (error) {
             toast.error("Error al registrarse con Google", { position: "bottom-right" });
         } finally {
@@ -84,34 +87,64 @@ export default function Register() {
         }
     };
 
+    const iconStyle = {
+        position: "absolute",
+        left: "0.6rem",
+        top: "50%",
+        transform: "translateY(-50%)",
+        color: "#ffd600",
+        fontSize: "1.2rem",
+    };
+
+    const inputStyle = {
+        paddingLeft: "2.2rem",
+        width: "100%",
+    };
+
+
+
     return (
         <>
             <div className="login-container">
                 <img src="/logo-azul.png" alt="Logo" className="logo" />
                 <h2>Registro</h2>
 
-                <input
-                    type="text"
-                    placeholder="Nombre de usuario"
-                    maxLength={20}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    disabled={loading}
-                />
-                <input
-                    type="email"
-                    placeholder="Correo electrónico"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={loading}
-                />
+                {/* Usuario */}
                 <div style={{ position: "relative" }}>
+                    <FiUser style={iconStyle} />
+                    <input
+                        type="text"
+                        placeholder="Nombre de usuario"
+                        maxLength={20}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        disabled={loading}
+                        style={inputStyle}
+                    />
+                </div>
+
+                {/* Email */}
+                <div style={{ position: "relative" }}>
+                    <FiMail style={iconStyle} />
+                    <input
+                        type="email"
+                        placeholder="Correo electrónico"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        disabled={loading}
+                        style={inputStyle}
+                    />
+                </div>
+
+                {/* Contraseña */}
+                <div style={{ position: "relative" }}>
+                    <FiLock style={iconStyle} />
                     <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Contraseña"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        style={{ paddingRight: "2.5rem" }}
+                        style={{ ...inputStyle, paddingRight: "2.5rem" }}
                         disabled={loading}
                     />
                     <button
@@ -120,16 +153,19 @@ export default function Register() {
                         style={toggleStyle}
                         disabled={loading}
                     >
-                        {showPassword ? "🙈" : "👁️"}
+                        {showPassword ? <FiEyeOff /> : <FiEye />}
                     </button>
                 </div>
+
+                {/* Repetir contraseña */}
                 <div style={{ position: "relative" }}>
+                    <FiLock style={iconStyle} />
                     <input
                         type={showRepeatPassword ? "text" : "password"}
                         placeholder="Repetir contraseña"
                         value={repeatPassword}
                         onChange={(e) => setRepeatPassword(e.target.value)}
-                        style={{ paddingRight: "2.5rem" }}
+                        style={{ ...inputStyle, paddingRight: "2.5rem" }}
                         disabled={loading}
                     />
                     <button
@@ -138,7 +174,7 @@ export default function Register() {
                         style={toggleStyle}
                         disabled={loading}
                     >
-                        {showRepeatPassword ? "🙈" : "👁️"}
+                        {showRepeatPassword ? <FiEyeOff /> : <FiEye />}
                     </button>
                 </div>
 
@@ -174,6 +210,6 @@ const toggleStyle = {
     background: "none",
     border: "none",
     cursor: "pointer",
-    fontSize: "1.2rem",
-    color: "#190152",
+    fontSize: "1.3rem",
+    color: "#ffd600",
 };

@@ -1,0 +1,87 @@
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    position: fixed;
+    top: 18px;
+    left: 16px;
+    z-index: 11000;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 10999;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    z-index: 11000;
+    transform: translateX(-100%);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.6);
+}
+
+
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    align-self: flex-end;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    color: white;
+    font-size: 1.25rem;
+    padding: 0.75rem 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 8px;
+}
+
+.sidebar-nav li:hover {
+    background-color: rgba(255, 214, 0, 0.2);
+}
+
+.sidebar-nav li svg {
+    margin-right: 0.75rem;
+    font-size: 1.5rem;
+}
