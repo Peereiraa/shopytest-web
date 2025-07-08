@@ -87,3 +87,126 @@ html,
 .perfil-option.logout {
     cursor: pointer;
 }
+
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #ffd600;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 1rem;
+    border: 2px solid white;
+    transition: background 0.3s;
+}
+
+.camera-icon:hover {
+    background-color: #ffca00;
+}
+
+/*CAMBIAR CORREO*/
+
+.form-cambiar-correo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.perfil-input {
+    padding: 0.75rem 1rem;
+    padding-left: 2.5rem; /* espacio para el ícono */
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    transition: border 0.3s ease;
+}
+
+.perfil-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.perfil-input:focus {
+    border-color: #ffd600;
+}
+
+/* Botones al final del formulario */
+.botones-formulario {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.volver-btn,
+.guardar-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+/* Botón volver */
+.volver-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.volver-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Botón guardar */
+.guardar-btn {
+    background-color: #ffd600;
+    color: #000;
+}
+
+.guardar-btn:hover {
+    background-color: #ffca00;
+}
+

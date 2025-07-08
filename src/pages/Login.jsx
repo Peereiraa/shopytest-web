@@ -17,6 +17,7 @@ export default function Login() {
     const navigate = useNavigate();
     const location = useLocation();
 
+    
     useEffect(() => {
         const username = localStorage.getItem("username");
 
@@ -29,6 +30,7 @@ export default function Login() {
             if (user) {
                 localStorage.setItem("userEmail", user.email);
                 localStorage.setItem("username", user.displayName);
+                localStorage.setItem("userId", data.userId);
                 navigate("/home");
             }
         });
@@ -81,6 +83,7 @@ export default function Login() {
 
             localStorage.setItem("username", data.username);
             localStorage.setItem("userEmail", email);
+            localStorage.setItem("userId", data.userId);
 
             navigate("/home");
 

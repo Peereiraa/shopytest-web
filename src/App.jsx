@@ -4,8 +4,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Perfil from "./pages/Perfil";
+import CambiarCorreo from './pages/Profile/CambiarCorreo';
 import ProtectedRoute from "./components/ProtectedRoute";
-import { isAuthenticated } from "./components/auth"; 
+import { isAuthenticated } from "./components/auth";
 import './styles/index.css';
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
         {/* Registro */}
         <Route path="/register" element={<Register />} />
 
-        {}
+        {/* Home */}
         <Route
           path="/home"
           element={
@@ -49,12 +50,22 @@ function App() {
           }
         />
 
-        {}
+        {/* Perfil */}
         <Route
           path="/perfil"
           element={
             <ProtectedRoute>
               <Perfil />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Cambiar Correo */}
+        <Route
+          path="/cambiar-correo"
+          element={
+            <ProtectedRoute>
+              <CambiarCorreo />
             </ProtectedRoute>
           }
         />
