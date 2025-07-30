@@ -11,33 +11,58 @@ import '../styles/Perfil.css';
 import avatarDefault from '../assets/foto.png';
 import Nav from '../components/Nav';
 import { ToastContainer, toast } from "react-toastify";
+import { auth } from '../components/firebase'; 
 import { logout } from '../components/auth';
 
 const Perfil = () => {
     const username = localStorage.getItem("username");
     const userId = localStorage.getItem("userId");
     const navigate = useNavigate();
-    const [avatarSrc, setAvatarSrc] = useState(avatarDefault);
     const location = useLocation();
 
-    useEffect(() => {
-        if (!userId) return;
+    const [avatarSrc, setAvatarSrc] = useState(avatarDefault);
+    const [isGoogleUser, setIsGoogleUser] = useState(false);
 
-        fetch(`/api/users/${userId}/photo`)
-        .then(res => {
-                if (!res.ok) throw new Error('No se pudo obtener la foto');
-                return res.json();
-            })
-            .then(data => {
-                if (data.profilePhoto) setAvatarSrc(data.profilePhoto);
-            })
-            .catch(() => { });
-    }, [userId]);
+    useEffect(() => {
+        const currentUser = auth.currentUser;
+
+        if (currentUser) {
+            const isGoogle = currentUser.providerData.some(
+                (provider) => provider.providerId === "google.com"
+            );
+            setIsGoogleUser(isGoogle);
+
+            if (isGoogle && currentUser.photoURL) {
+                setAvatarSrc(currentUser.photoURL);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!isGoogleUser && userId) {
+            fetch(`/api/users/${userId}/photo`)
+                .then(res => {
+                    if (!res.ok) throw new Error('No se pudo obtener la foto');
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.profilePhoto) setAvatarSrc(data.profilePhoto);
+                })
+                .catch(() => { });
+        }
+    }, [userId, isGoogleUser]);
 
     useEffect(() => {
         if (location.state?.emailChanged) {
             toast.success("Correo actualizado correctamente", { position: "bottom-right" });
-            window.history.replaceState({}, document.title); 
+            window.history.replaceState({}, document.title);
+        }
+    }, [location.state]);
+
+    useEffect(() => {
+        if (location.state?.passwordChanged) {
+            toast.success("Contraseña actualizada correctamente", { position: "bottom-right" });
+            window.history.replaceState({}, document.title);
         }
     }, [location.state]);
 
@@ -58,7 +83,6 @@ const Perfil = () => {
                 const base64Image = reader.result;
                 setAvatarSrc(base64Image);
 
-                // Guardar foto en backend
                 if (!userId) {
                     toast.error("Usuario no identificado");
                     return;
@@ -66,9 +90,7 @@ const Perfil = () => {
 
                 fetch(`/api/users/${userId}/photo`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ photo: base64Image })
                 })
                     .then(res => {
@@ -96,16 +118,18 @@ const Perfil = () => {
                     <div className="perfil-header">
                         <div className="avatar-wrapper">
                             <img src={avatarSrc} alt="Avatar" className="perfil-avatar" />
-                            <label htmlFor="avatar-upload" className="camera-icon">
-                                <FaCamera />
-                                <input
-                                    type="file"
-                                    id="avatar-upload"
-                                    accept="image/*"
-                                    onChange={handleImageChange}
-                                    hidden
-                                />
-                            </label>
+                            {!isGoogleUser && (
+                                <label htmlFor="avatar-upload" className="camera-icon">
+                                    <FaCamera />
+                                    <input
+                                        type="file"
+                                        id="avatar-upload"
+                                        accept="image/*"
+                                        onChange={handleImageChange}
+                                        hidden
+                                    />
+                                </label>
+                            )}
                         </div>
                         <h2 className="perfil-username">{username || 'Usuario'}</h2>
                     </div>
@@ -115,14 +139,25 @@ const Perfil = () => {
                             <FaShoppingBag className="perfil-icon" />
                             <span>Últimas compras</span>
                         </div>
-                        <div className="perfil-option" onClick={() => navigate("/cambiar-correo")}>
+
+                        <div
+                            className="perfil-option"
+                            style={isGoogleUser ? { opacity: 0.5, pointerEvents: 'none' } : {}}
+                            onClick={() => !isGoogleUser && navigate("/cambiar-correo")}
+                        >
                             <FaEnvelope className="perfil-icon" />
                             <span>Cambiar correo</span>
                         </div>
-                        <div className="perfil-option">
+
+                        <div
+                            className="perfil-option"
+                            style={isGoogleUser ? { opacity: 0.5, pointerEvents: 'none' } : {}}
+                            onClick={() => !isGoogleUser && navigate("/cambiar-contraseña")}
+                        >
                             <FaLock className="perfil-icon" />
                             <span>Cambiar contraseña</span>
                         </div>
+
                         <div className="perfil-option logout" onClick={handleLogout}>
                             <FaSignOutAlt className="perfil-icon" />
                             <span>Cerrar sesión</span>

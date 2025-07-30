@@ -5,9 +5,10 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Perfil from "./pages/Perfil";
 import CambiarCorreo from './pages/Profile/CambiarCorreo';
+import CambiarContraseña from './pages/Profile/CambiarContraseña';
 import ProtectedRoute from "./components/ProtectedRoute";
 import { isAuthenticated } from "./components/auth";
-import './styles/index.css';
+import './index.css';
 
 function App() {
   return (
@@ -66,6 +67,15 @@ function App() {
           element={
             <ProtectedRoute>
               <CambiarCorreo />
+            </ProtectedRoute>
+          }
+        />
+        {/* Cambiar Contraseña */}
+        <Route
+          path="/cambiar-contraseña"
+          element={
+            <ProtectedRoute>
+              <CambiarContraseña />
             </ProtectedRoute>
           }
         />

@@ -132,6 +132,37 @@ app.post('/api/users/:id/change-email', async (req, res) => {
     }
 });
 
+// Cambiar contraseña
+app.post('/api/users/:id/change-password', async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const userId = req.params.id;
+
+    if (!currentPassword || !newPassword) {
+        return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+    }
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
+
+        // Verificar contraseña actual
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) return res.status(400).json({ error: 'La contraseña actual no es correcta' });
+
+        // Hashear nueva contraseña
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+        user.password = hashedPassword;
+        await user.save();
+
+        return res.status(200).json({ message: 'Contraseña actualizada correctamente' });
+    } catch (err) {
+        console.error('Error al cambiar la contraseña:', err);
+        return res.status(500).json({ error: 'Error al cambiar la contraseña' });
+    }
+});
+
 // --- Funciones para iniciar y detener MongoDB (Windows service) ---
 function startMongo() {
     return new Promise((resolve, reject) => {

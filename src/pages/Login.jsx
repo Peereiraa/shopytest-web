@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import '../styles/index.css';
+import '../styles/Auth.css';
 import { auth, provider } from "../components/firebase";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,7 +17,7 @@ export default function Login() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    
+
     useEffect(() => {
         const username = localStorage.getItem("username");
 
@@ -124,61 +124,85 @@ export default function Login() {
 
     return (
         <>
-            <div className="login-container">
-                <img src="../assets/logo.jpg" alt="Logo" className="logo" />
-                <h2>Iniciar Sesión</h2>
-                <form onSubmit={handleSubmit} noValidate>
-                    <div className="input-group">
-                        <FaEnvelope className="icon" />
-                        <input
-                            type="email"
-                            placeholder="Correo electrónico"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            disabled={loading}
-                        />
-                    </div>
+            <div className="auth-page">
+                <div className="login-container">
+                    <img src="../assets/logo.jpg" alt="Logo" className="logo" />
+                    <h2>Iniciar Sesión</h2>
+                    <form onSubmit={handleSubmit} noValidate>
+                        <div style={{ position: "relative", marginBottom: "1.2rem" }}>
+                            <FaEnvelope
+                                style={{
+                                    position: "absolute",
+                                    left: "0.6rem",
+                                    top: "50%",
+                                    transform: "translateY(-50%)",
+                                    color: "#999",
+                                    fontSize: "1.2rem",
+                                    pointerEvents: "none",
+                                }}
+                            />
+                            <input
+                                type="email"
+                                placeholder="Correo electrónico"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                disabled={loading}
+                                style={{ paddingLeft: "2.2rem", width: "100%" }}
+                            />
+                        </div>
 
-                    <div className="input-group">
-                        <FaLock className="icon" />
-                        <input
-                            type="password"
-                            placeholder="Contraseña"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            disabled={loading}
-                        />
-                    </div>
+                        <div style={{ position: "relative", marginBottom: "1.2rem" }}>
+                            <FaLock
+                                style={{
+                                    position: "absolute",
+                                    left: "0.6rem",
+                                    top: "50%",
+                                    transform: "translateY(-50%)",
+                                    color: "#999",
+                                    fontSize: "1.2rem",
+                                    pointerEvents: "none",
+                                }}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Contraseña"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                disabled={loading}
+                                style={{ paddingLeft: "2.2rem", width: "100%" }}
+                            />
+                        </div>
 
-                    <button type="submit" className="main-btn" disabled={loading}>
-                        {loading ? "Cargando..." : "Iniciar sesión"}
+                        <button type="submit" className="main-btn" disabled={loading}>
+                            {loading ? "Cargando..." : "Iniciar sesión"}
+                        </button>
+                    </form>
+
+                    <p className="forgot-password">¿Olvidaste tu contraseña?</p>
+                    <p className="register-text">
+                        ¿No tienes cuenta?{" "}
+                        <Link
+                            to="/Register"
+                            style={{
+                                fontWeight: 600,
+                                color: "#171F1D",
+                                textDecoration: "none",
+                                cursor: "pointer",
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
+                            onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
+                        >
+                            Regístrate
+                        </Link>
+                    </p>
+
+                    <hr />
+
+                    <button className="google-btn" onClick={handleGoogleLogin} disabled={loading}>
+                        <img src={googleLogo} alt="Google" />
+                        {loading ? "Cargando..." : "Iniciar sesión con Google"}
                     </button>
-                </form>
-
-                <p className="forgot-password">¿Olvidaste tu contraseña?</p>
-                <p className="register-text">
-                    ¿No tienes cuenta?{" "}
-                    <Link
-                        to="/Register"
-                        style={{
-                            fontWeight: 600,
-                            color: "#ffd600",
-                            textDecoration: "none",
-                            cursor: "pointer",
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
-                        onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
-                    >
-                        Regístrate
-                    </Link>
-                </p>
-
-                <hr />
-
-                <button className="google-btn" onClick={handleGoogleLogin} disabled={loading}>
-                    <img src={googleLogo} alt="Google" />
-                    {loading ? "Cargando..." : "Iniciar sesión con Google"}
-                </button>
+                </div>
             </div>
 
             <ToastContainer
@@ -195,4 +219,5 @@ export default function Login() {
             />
         </>
     );
+
 }

@@ -1,29 +1,42 @@
-body, html, #root {
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+}
+
+body {
+  background-color: #f0f2f5; /* Fondo neutro claro */
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  min-height: 100vh;
+  color: #171F1D;
+}
+
+.auth-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f5;
   box-sizing: border-box;
   overflow-x: hidden;
 }
 
 .login-container {
-  background-color: rgba(255, 255, 255, 0.05); /* similar a perfil-card */
+  background-color: #f5f5f5; /* Card clara */
   padding: 3rem 2rem;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   width: 90vw;
   max-width: 580px;
   text-align: center;
   box-sizing: border-box;
-  backdrop-filter: blur(12px);
-  color: #fff;
+  color: #171F1D;
 }
 
 .login-container img.logo {
@@ -33,8 +46,8 @@ body, html, #root {
 
 .login-container h2 {
   margin-bottom: 2rem;
-  color: #fff;
   font-size: 1.8rem;
+  color: #171F1D;
 }
 
 .login-container input {
@@ -43,18 +56,18 @@ body, html, #root {
   box-sizing: border-box;
   padding: 0.9rem 1rem;
   margin: 0 auto 1.2rem auto;
-  border: 2px solid #444;
+  border: 1.5px solid #ccc;
   border-radius: 10px;
   font-size: 1rem;
-  color: #fff;
-  background-color: rgba(255,255,255,0.1);
-  transition: border-color 0.3s;
+  color: #171F1D;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.3s, background-color 0.3s;
 }
 
 .login-container input:focus {
-  border-color: #ffd600;
+  border-color: #171F1D;
   outline: none;
-  background-color: rgba(255,255,255,0.15);
+  background-color: #fff;
 }
 
 .login-container .main-btn {
@@ -63,8 +76,8 @@ body, html, #root {
   border: none;
   border-radius: 10px;
   font-size: 1.1rem;
-  background-color: #ffd600;
-  color: #0f2027;
+  background-color: #171F1D;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
   font-weight: 600;
@@ -72,17 +85,17 @@ body, html, #root {
 }
 
 .login-container .main-btn:hover {
-  background-color: #e6c200;
+  background-color: #2a3936;
 }
 
 .login-container p {
   margin: 0.5rem 0;
   font-size: 0.95rem;
-  color: #ccc;
+  color: #333;
 }
 
 .login-container p span {
-  color: #ffd600;
+  color: #171F1D;
   cursor: pointer;
   font-weight: 600;
 }
@@ -90,16 +103,16 @@ body, html, #root {
 .login-container hr {
   margin: 2rem 0;
   border: none;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid #ccc;
 }
 
 .google-btn {
   width: 100%;
   padding: 1rem;
-  border: 2px solid #000;
+  border: 2px solid #171F1D;
   border-radius: 10px;
-  background-color: #ffd600; 
-  color: #000;
+  background-color: transparent;
+  color: #171F1D;
   font-weight: 600;
   font-size: 1.05rem;
   cursor: pointer;
@@ -113,44 +126,13 @@ body, html, #root {
 .google-btn img {
   width: 22px;
   height: 22px;
-  filter: none;
 }
 
 .google-btn:hover {
-  background-color: #000;
-  color: #ffd600;
-}
-
-.input-group {
-  position: relative;
-  width: 100%;
-  margin-bottom: 1.2rem;
-}
-
-.input-group .icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-  font-size: 1.2rem;
-  pointer-events: none;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 0.9rem 1rem 0.9rem 2.8rem;
-  border: 2px solid #444;
-  border-radius: 10px;
-  font-size: 1rem;
+  background-color: #171F1D;
   color: #fff;
-  background-color: rgba(255,255,255,0.1);
-  box-sizing: border-box;
-  transition: border-color 0.3s;
 }
 
-.input-group input:focus {
-  border-color: #ffd600;
-  outline: none;
-  background-color: rgba(255,255,255,0.15);
+.icon-style {
+  color: #171F1D;
 }
